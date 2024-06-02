@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Samarth Rentals</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            
+        }
+
+        .main-header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            z-index: 999;
+            position: fixed;
+            width: 100%;
+        }
+
+        .logo img {
+            width: auto; /* Adjust as needed */
+            height: 50px;
+        }
+
+        .nav-icons {
+            position: relative;
+            margin-right: 20px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-icons img {
+            width: 25px; /* Adjust as needed */
+            margin-left: 10px; /* Add some space between icons */
+            cursor: pointer;
+        }
+
+        .menu-container {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            background-color: #fff;
+            width: 250px;
+            height: 100%;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.02);
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+            padding-top: 60px;
+            padding-right: 20px;
+        }
+
+        .menu-options {
+            padding: 20px;
+        }
+
+        .menu-options ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-options ul li {
+            margin-bottom: 10px;
+        }
+
+        .menu-container.active {
+            right: 0;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Styling links */
+        .menu-options ul li a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .menu-options ul li a:hover {
+            color: #007bff;
+            background-color: #eaeaea;
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close-btn img {
+            width: 20px;
+        }
+
+        /* Social media icons */
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icons img {
+            width: 30px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+
+
+        /* Signup form */
+        .signup-form {
+            position: fixed;
+            top: -300px; /* Initial position off the screen */
+            right: 0;
+            background-color: #fff;
+            width: 100vw;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+            transition: top 0.3s ease;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media only screen and (max-width: 767px) {
+    /* Mobile devices */
+    .signup-form {
+        width: 90%;
+    }
+}
+
+        .signup-form.active {
+            top: 0; /* Slide down when active */
+        }
+
+        .signup-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .signup-form h3 {
+            margin-bottom: 10px;
+        }
+
+        .signup-form .close-btn {
+            align-self: flex-end;
+            margin-bottom: 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .signup-form button {
+            width: calc(100% - 0px);
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .signup-form button:hover {
+            background-color: #0056b3;
+        }
+
+        
+        
+        footer {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            padding: 20px;
+            width: 100% - 40px;/* Make footer span full width */
+        }
+        footer a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        footer hr {
+            border-color: #fff;
+            width: 50%;
+            margin: auto;
+        }
+        footer p {
+            color: #f2f2f2;
+            margin-top: 10px;
+        }
+        footer .custom-icon {
+            font-size: 38px;
+            color: #f2f2f2;
+        }
+        footer .partner-label {
+            font-weight: bold;
+            font-size: 10px;
+            margin-bottom: 1px;
+            margin-top: 10px;
+        }
+        footer .partner-logo {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+    </style>
+    <style type="text/css">
+    
+    .container090 {
+    margin: 0px auto;
+    padding: 0px;
+    background-color: #fff;
+    border-radius: 0px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.059);
+    overflow: hidden;
+    min-height: 70vh;
+    
+    }
+    
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 70px;
+    }
+    
+    table th,
+    table td {
+    padding: 0.75em; /* Use ems for padding */
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Add thin partition between rows */
+    }
+    
+    table th {
+    background-color: #111;
+    padding: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    
+    }
+    
+    table tbody tr {
+    background-color: #fff; /* Set background color for each row */
+    }
+    
+    table tbody tr:hover {
+    background-color: #e0e0e0;
+    }
+    
+    /* Original Badge Styles */
+    .badge {
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.8em; /* Use ems for font size */
+    font-weight: bold;
+    }
+    
+    .badge-success {
+    background-color: #007bff;
+    color: #fff;
+    }
+    
+    .badge-danger {
+    background-color: #222;
+    color: #fff;
+    }
+    
+    /* Modal Content */
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Center horizontally */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px; /* Limit the maximum width of the modal content */
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center the modal content */
+    }
+    
+    /* Form Styling */
+    .form0 {
+    display: grid;
+    gap: 8px;
+    margin-top: 20px;
+    
+    }
+    
+    label {
+    font-weight: bold;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1px;
+    color: #555;
+    font-size: 12px;
+    text-transform: uppercase;
+    }
+    
+    input[type="text"],
+    input[type="submit"] {
+    padding: 15px;
+    background-color: #F5F6FB;
+    border-radius: 5px;
+    width: 100%;
+    border: 0px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none; 
+    }
+    
+    input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 19px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 25px;
+    }
+    
+    
+    /* The Modal (background) */
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scrolling if modal content exceeds viewport */
+    background-color: rgba(0,0,0,0.3);
+    justify-content: center;
+    align-items: center;
+    
+    }
+    
+    /* Close Button */
+    .close {
+    color: #333;
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: -10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    }
+    
+    
+    
+    
+    
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghRnIEasF3bfKnYTZHC1F-iJGfiSXlYSY1EMW5O5sDo_jLx02v7yNKSCXb37WUSkRJN2uMz0oDmU06TxGujCvQrHwSILwQlO2xOF9eQeIuCKWHPthjrHEhPsAu8ZEjMBUqRRzzbM_r3hCUUEFOqoWwCwG99DfgwFakanTtkAvWXRrAU5AeW5CXu_RBrEB1/s3264/20240515_163416.png" alt="Samarth Rentals Logo">
+    </div>
+    <div class="nav-icons">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjI9iF1I_z2SD1nmGcmu8QqnJHfXfBYOMyxUH7UMkC66QpNj-Uf8GFw-6ZREy-BdAbq1tX3OXcvAGkbNzKzKLYzg5VSPgQjb5z_f5Hb4YHpKFCFPt5txpUY38qqOECXd_nT7dH9YAjXH6mu82RyBKKsFgFPgwuDXgkWLXK3vLtbkqVFNLllLnI_TvpvTxGW/s512/user.png" alt="User Profile" class="user-icon" onclick="toggleSignup()">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8Ta9D_2tIyDcnta8kBRc5hMg6q_Ws72kCsvCMfGgfyNJAiu2Tzl_Z4pv8p1DWToSAFxa1ehUTI2HBsScU6pWzWbktwQWfVSBNlF8Z5eMaQUcpE9cLe208-JvBqqtWXV5LUhzedqOnzDLtNqp1uxj41giAjLMl4R9B5FeRXw6jlXozipB4SwHPeYmphHtJ/s512/menu-burger.png" alt="Menu" class="menu-icon" onclick="toggleMenu()">
+        <div class="menu-container" id="menuContainer">
+            <div class="close-btn" onclick="toggleMenu()">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUVMz6OgvWbE3EiwqQBkjq4Je5OhojZFrXAEbr9Pvkm5oG3bw3AXYTRvMk0CKwaYIDDL1qJJUjBvcv9USG5x9ynVwizROKWZ5GpSspZ0iZJls196NcjtiOqGg3jWyRVFc9MHwJQbeWmlydherIfuJRCyCvM6AGuuJbmopv4OH_4CEIdUIVn4ANSaXTAGSd/s512/arrow-left.png" alt="Close Menu">
+                
+            </div>
+            <div class="menu-options">
+                <ul>
+                    <li><a href="https://nxtcounsil.github.io/samarthrentals/">Home</a></li>
+                    <li><a href="https://nxtcounsil.github.io/samarthrentals/#aboutus">About</a></li>
+                    <li><a href="https://nxtcounsil.github.io/samarthrentals/#contact">Contact</a></li>
+                    <li><a href="https://nxtcounsil.github.io/samarthrentals/tandc.html">T&C</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="social-icons">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVsp-plHcCoOnMUi9Ke9waL1b6Fi2FGBpNdonjEhEZZ1FjVZoRBMpuTbtfYPl_W2eA-sIpelq04e9O6w1Mx5a2kYlp6eZuXZkNSiwmChnIPcreZRz7tHCWqiuCSkv67s34x3238NOKl7eaYoCnJsgKjAj2yn9ZZtE2nzCKlrW0RqGLHYs_uV7YgXEQIYia/s512/facebook.png" alt="Facebook" onclick="openSocial('https://m.facebook.com/people/samarth-bike-car-rental-service/61550087411827/')">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgC7nKvjJRCZRhCGNA8izCShrzrO8v0UMkf-NqYCngHItEvUItUx6GbogeFlDOdPL-fMBeCINcBtaXStF9ElWa-6LzYJRz35jFkkc85wPJZDEKhy75tpeO2RehIgQyRRgm6JQveZn-TVnCShye4IoY-07bexPVlCdTGIf8prX1-7-R0wTBz9iIlmISA6ZTT/s512/whatsapp.png" alt="WhatsApp" onclick="openSocial('https://wa.me/7248972808')">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCyLPmhrdoZPBQWdjh8fWufZi2lHXJ5Ba7-ny7Ci1ZYocseTaoGxBv53IYwVYzXHbbpNeiDBCQYQDXtQhuk0FZFkVNUylf1O8jQ8F_cWRsZgxXs8qeUOifaqXoopS30pL2poj5Jv3Za8JVB6AJc1UGh03h9vsTnWD314xcD12jr8NWUtYSUJisA00YgmLY/s512/instagram.png" alt="Instagram" onclick="openSocial('https://www.instagram.com/samarth_bike_rental_agency_ned?igsh=b3c1c2FkMjQ5ZjFz')">
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="signup-form" id="signupForm">
+    <div class="close-btn" onclick="toggleSignup()">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEheurAydJuI2YBgXxf6Ih2eStcZE16TLt_Be-UfGF6DCEOb9fQKfjBZGsTP3ZP5wRfbI5Y2aVy69A9UM7mN_QOtumSlnxEBDqmmSBEnDBDudhqOPCY-NpecPtebUqSoxffHAJI6E_-9PJ1O4wAzD5KSKdwZ1s0KwmZ_xqWTg_FqqYTqptS5y7LsA3NUDHRi/s512/cross.png" alt="Close Signup">
+    </div>
+    <h3 id="signupHeading">Sign Up</h3>
+    <form onsubmit="saveUserData(event)">
+        <input type="text" id="nameInput" placeholder="Name">
+        <input  type="text" id="phoneInput" placeholder="Phone Number">
+        <button type="submit" id="signupButton">Sign Up</button>
+    </form>
+</div>
+
+
+    <div class="container090">
+    <table class="table table-striped table-inverse table-hover table-responsive">
+    <thead  class="thead-inverse">
+    <th width="50%">vehicle</th>
+    <th width="40%">price</th>
+    <th width="10%">status</th>
+    </thead>
+    <tbody id="userlist">
+    </tbody>
+    </table>
+    
+    </div>
+    <div class="col-xl-2">
+    
+    </div>
+    
+    </div>
+    </div>
+
+    <div id="myModal" class="modal">
+    <div class="modal-content">
+    <button class="close">&times;</button>
+    <form class="form0" id="myForm">
+    <label for="vehicle">Vehicle</label>
+    <input type="text" id="vehicle" name="vehicle" readonly>
+    <label for="vehicle">Price</label>
+    <input type="text" id="price" name="price" readonly>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" readonly>
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="phone" readonly>
+    <input type="submit" onclick="addData()" value="Submit">
+    </form>
+    </div>
+    </div>
+    
+    
+    <footer>
+        <div style="text-align: center;">
+            <!-- Custom icon -->
+            <i class="fa-solid fa-face-laugh-wink custom-icon"></i>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <!-- Social media icons -->
+            <a href="https://m.facebook.com/people/samarth-bike-car-rental-service/61550087411827/" style="text-decoration: none; color: #fff;"><i class="fab fa-facebook fa-2x"></i></a>
+            <a href="https://wa.me/7248972808" style="text-decoration: none; color: #fff;"><i class="fab fa-whatsapp fa-2x"></i></a>
+            <a href="https://www.instagram.com/samarth_bike_rental_agency_ned?igsh=b3c1c2FkMjQ5ZjFz" style="text-decoration: none; color: #fff;"><i class="fab fa-instagram fa-2x"></i></a>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <!-- Navigation links -->
+            <a href="https://nxtcounsil.github.io/samarthrentals/" style="text-decoration: none; color: #fff; margin: 0 10px;">Home</a>
+            <a href="https://nxtcounsil.github.io/samarthrentals/#aboutus" style="text-decoration: none; color: #fff; margin: 0 10px;">About</a>
+            <a href="https://nxtcounsil.github.io/samarthrentals/#contact" style="text-decoration: none; color: #fff; margin: 0 10px;">Contact</a>
+            <a href="https://nxtcounsil.github.io/samarthrentals/tandc.html" style="text-decoration: none; color: #fff; margin: 0 10px;">T&C</a>
+        </div>
+        <div style="text-align: center; margin-top: 35px;">
+            <!-- Decorative element -->
+            <hr>
+            <p>&copy; 2024 Samarth Rentals. All rights reserved.</p>
+            <!-- Tech Partner -->
+            <p class="partner-label">Tech Partner</p>
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6hwDTxhsj7La_ocmo0pQLOSFsGuDg_29FPS1sipee5N2pb18-JPVOiSdja1dzYFvmMsr5K98cXstxYE5IMTBHni2UVVUaKpGMvvwP0pTEGJ2V4zmA1df_vKc_qh5oSehBE7WVPRzK9x2zPOd0uY12Xe7m1axuUp5iqYjeSO2F4a7PkHpJhAfypR4qAvkw/s3264/20240409_181702.png" alt="artxsoft tech logo" class="partner-logo" style="height: 40px;" onclick="window.location.href='https://artxsoft.tech'">
+        </div>
+    </footer>
+
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+ <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+ <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+
+ <!-- Add Firebase products that you want to use -->
+ <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+apiKey: "AIzaSyCYCXeEkLS01fyXCYN27E-oYR_25DGB2KE",
+authDomain: "rentalagency-f374f.firebaseapp.com",
+databaseURL: "https://rentalagency-f374f-default-rtdb.firebaseio.com",
+projectId: "rentalagency-f374f",
+storageBucket: "rentalagency-f374f.appspot.com",
+messagingSenderId: "359068447961",
+appId: "1:359068447961:web:8faa2d5f6dae9ad092fac8",
+measurementId: "G-WQWF02JFTF"
+
+ };
+ // Initialize Firebase
+ firebase.initializeApp(firebaseConfig);
+ // firebase.analytics();
+
+
+ // console.log(firebase);
+
+ var database = firebase.database();
+ var ref = database.ref('vehicles/2w/');
+ ref.on('value',gotData,errData);
+
+ function gotData(data)
+ {
+
+   $("#userlist").empty();
+   // console.log(data.val());
+   var vehicles=data.val();
+   var keys=Object.keys(vehicles);
+   // console.log(keys);
+
+   for(var i=0;i<keys.length;i++)
+   {
+     var k=keys[i];
+     var status = vehicles[k].status;
+     var vehicle = vehicles[k].vehicle.replace(/["\\]/g, '');
+     var price = vehicles[k].priceD.replace(/["\\]/g, '');
+     
+    var status_msg = '';
+    if (status == 1) {
+    status_msg = `<span class="badge badge-pill badge-success">Available</span>`;
+    
+     // console.log(vehicle,price);
+     // userlist
+     $('#userlist').append(`
+       <tr>
+           <td>`+vehicle+`</td>
+           <td>`+price+`</td>
+           <td>`+status_msg+`</td>
+       </tr>
+     `); 
+     // <tr><td>'+vehicle+''+price+' <input type="button" value="change" onclick="update_user(\''+k+'\','+ status+')"><td></tr> 
+   }
+
+ }
+ 
+ }
+ function errData(err)
+ {
+   // console.log("Error!");
+   // console.log(err);
+
+ }
+
+
+function addData()
+{
+
+var database = firebase.database();
+var ref = database.ref('response');
+ref.on('value',gotData,errData);
+
+event.preventDefault();
+var vehicle = document.getElementById("vehicle").value;
+var price = document.getElementById("price").value;
+if (vehicle && price) {
+    localStorage.setItem("vehicle", vehicle);
+    localStorage.setItem("price", price);
+} 
+
+
+var name=$("#name").val();
+var phone=$("#phone").val();
+var vehicle=$("#vehicle").val();
+var price=$("#price").val();
+
+var data={
+name: name,
+phone: phone,
+vehicle: vehicle,
+price: price,
+}
+
+var result=ref.push(data);
+// console.log(data);
+// console.log(result.key);
+setTimeout(function() {
+window.location.href = "https://nxtcounsil.github.io/samarthrentals/success-page-SVR.html";
+}, 100);
+}
+
+
+
+
+ 
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on a row, show the modal
+$('table tbody').on('click', 'tr', function() {
+ modal.style.display = "block";
+});
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+ modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+ if (event.target == modal) {
+   modal.style.display = "none";
+ }
+}
+
+
+
+
+
+
+// When the user clicks on a row, show the modal and pre-fill the vehicle and price inputs
+$('table tbody').on('click', 'tr', function() {
+ var vehicleValue = $(this).find('td:nth-child(1)').text(); // Get the text of the first <td> element within the clicked row
+ var priceValue = $(this).find('td:nth-child(2)').text(); // Get the text of the second <td> element within the clicked row
+ $('#vehicle').val(vehicleValue); // Set the value of the vehicle input field in the form
+ $('#price').val(priceValue); // Set the value of the price input field in the form
+ modal.style.display = "block"; // Show the modal
+
+
+
+ // Retrieve values from local storage
+ var storedName = localStorage.getItem('name');
+ var storedPhone = localStorage.getItem('phone');
+
+ // Pre-fill the name and phone fields if values are present in local storage
+ if (storedName) {
+   $('#name').val(storedName);
+ }
+ if (storedPhone) {
+   $('#phone').val(storedPhone);
+ }
+
+ modal.style.display = "block"; // Show the modal
+});
+
+// When the form is submitted, store the values of name and phone in local storage
+$('#myForm').submit(function(event) {
+ event.preventDefault(); // Prevent the default form submission
+
+ var nameValue = $('#name').val(); // Get the value of the name input field
+ var phoneValue = $('#phone').val(); // Get the value of the phone input field
+
+ // Store the values in local storage
+ localStorage.setItem('name', nameValue);
+ localStorage.setItem('phone', phoneValue);
+
+ // Optionally, you can clear the form fields after submission
+ // $('#name').val('');
+ // $('#phone').val('');
+
+ // Close the modal
+ modal.style.display = "none";
+});
+
+
+</script>
+
+
+
+
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById("menuContainer");
+        menu.classList.toggle("active");
+    }
+
+    function toggleSignup() {
+        var form = document.getElementById("signupForm");
+        form.classList.toggle("active");
+    }
+
+    function openSocial(url) {
+        window.open(url, '_blank');
+    }
+
+    function saveUserData(event) {
+        event.preventDefault();
+        var name = document.getElementById("nameInput").value;
+        var phone = document.getElementById("phoneInput").value;
+        if (name && phone) {
+            localStorage.setItem("name", name);
+            localStorage.setItem("phone", phone);
+            window.location.reload();
+        } 
+    }
+
+    // Check if user is already signed up
+    var name = localStorage.getItem("name");
+    var phone = localStorage.getItem("phone");
+    if (name && phone) {
+        var signupHeading = document.getElementById("signupHeading");
+        signupHeading.textContent = "Profile";
+        var nameInput = document.getElementById("nameInput");
+        var phoneInput = document.getElementById("phoneInput");
+        var signupButton = document.getElementById("signupButton");
+        nameInput.value = name;
+        phoneInput.value = phone;
+        signupButton.textContent = "Update";
+    }
+</script>
+
+</body>
+</html>
