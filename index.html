@@ -569,7 +569,7 @@
     .database()
     .ref("STATUS/" + Pnumber)
     .on("value", function (snap) {   
-    const statusValue = snap.val()[Vname];
+    const statusValue = snap.val()[Vname].replace(/["\\]/g, '');;
     document.getElementById("status").innerText = statusValue ? statusValue : "Processing";
     });
     
