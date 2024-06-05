@@ -598,7 +598,7 @@ if (vehicle && price) {
 var name=$("#name").val().replace(/\s+/g, '_').replace(/\//g, '');
 var phone=$("#phone").val().replace(/\s+/g, '_').replace(/\//g, '');
 var vehicle=$("#vehicle").val().replace(/\s+/g, '_').replace(/\//g, '');
-var price=$("#price").val().replace(/["\\]/g, '');
+var price=$("#price").val().replace(/\s+/g, '_').replace(/\//g, '');
 
 var data={
 name: name,
